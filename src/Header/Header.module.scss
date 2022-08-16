@@ -1,0 +1,49 @@
+.Header {
+  --font-family-sans-serif: "HCo Gotham SSm", sans-serif;
+  font-family: "HCo Gotham SSm",sans-serif;
+
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.Hader__logo {
+  margin-right: 30px;
+}
+
+.Header__content {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Header__navigation {
+  display: flex;
+}
+
+.Header__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.Header__navigation_item {
+  margin-right: 20px;
+}
+
+.Header__navigationLink {
+  text-decoration: none;
+  color: #343a40;
+  margin: 0 1px 0 0;
+  font-weight: 400;
+  font-size: 15px;
+}
