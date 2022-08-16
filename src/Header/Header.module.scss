@@ -2,7 +2,7 @@
   --font-family-sans-serif: "HCo Gotham SSm", sans-serif;
   font-family: "HCo Gotham SSm",sans-serif;
 
-  width: 100%;
+  // width: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -27,6 +27,12 @@
 
 .Header__navigation {
   display: flex;
+}
+
+@media (max-width: 999px) {
+  .Header__navigation {
+    display: none;
+  }
 }
 
 .Header__list {

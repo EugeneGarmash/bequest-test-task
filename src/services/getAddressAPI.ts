@@ -1,10 +1,9 @@
-import Axios, { AxiosRequestConfig, AxiosError, AxiosInstance } from 'axios';
-
+import axios from 'axios';
 
 const config = {
   baseURL: 'https://api.getAddress.io/',
 };
 
-const postcodeInstance = Axios.create(config);
+const postcodeInstance = axios.create(config);
 
 export default postcodeInstance;

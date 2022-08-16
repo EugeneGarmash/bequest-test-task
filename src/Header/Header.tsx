@@ -1,6 +1,7 @@
 import styles from './Header.module.scss';
 import Container from '../Container/Container';
 import Button from '../Button/Button';
+import BurgerButton from './BurderButton';
 
 const links = [
   {
@@ -36,7 +37,6 @@ const links = [
 const Header = () => {
 
   const handleApply = () => {
-    console.log('hahaha');
   }
 
   return (
@@ -50,12 +50,25 @@ const Header = () => {
             <nav className={styles.Header__navigation}>
               <ul className={styles.Header__list}>
                 {links.map(link => 
-                  <li className={styles.Header__navigation_item}><a href={link.href} className={styles.Header__navigationLink} title={link.text}><span>{link.text}</span></a></li>
+                  <li
+                    key={link.href}
+                    className={styles.Header__navigation_item}
+                  >
+                    <a
+                      href={link.href}
+                      className={styles.Header__navigationLink}
+                      title={link.text}
+                    >
+                      <span>{link.text}</span>
+                    </a>
+                  </li>
                 )}
               </ul>
 
               <Button onClick={handleApply}>APPLY NOW</Button>
             </nav>
+
+            <BurgerButton />
           </div>
         </Container>
       </div>

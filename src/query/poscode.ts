@@ -1,35 +1,28 @@
 import {
   useQuery,
-  useMutation,
-  UseQueryOptions,
-  UseMutationOptions,
-  QueryFunction,
-  MutationFunction,
-  UseQueryResult,
-  QueryKey,
-  UseMutationResult
 } from 'react-query';
 import postcodeInstance from '../services/getAddressAPI';
 
-type PostcodeResourse = {
-  "latitude": 52.24593734741211,
-  "longitude": -0.891636312007904,
+export type PostcodeResourse = {
+  "latitude": number,
+  "longitude": number,
   "addresses": Array<string>
 }
 
-
-export function usePostcodeSearch(postcode?: string) {
-  const queryOptions = {};
+export const usePostcodeSearch = (postcode: string, queryOptions?: any) => {
   const url = `/find/${postcode}?api-key=gm50TZ2Hj0aQdFsyWRbrZw36294`;
+  const fetchFunc = (): Promise<PostcodeResourse> => postcodeInstance.get(url).then(({ data }) => data);
 
-  return useQuery(
+  const query = useQuery(
     url,
-    () => postcodeInstance.get<PostcodeResourse>,
-    { enabled: !!postcode, ...queryOptions }
-  );
-  
-}
+    fetchFunc,
+    { enabled: !!postcode,
+      ...queryOptions
+    }
+  )
 
-// export function useAutocomplete(partialpostcode) {
-//   return useQuery(text && ["colorSearch", text], searchColors);
-// }
+  return {
+    key: url,
+    ...query
+  };
+}

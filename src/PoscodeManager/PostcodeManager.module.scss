@@ -1,0 +1,16 @@
+.PostcodeManager__selectContainer {
+  display: flex;
+  height: 42px;
+}
+
+.PostcodeManager__select {
+  max-width: 450px;
+}
+
+.PostcodeManager__errorText {
+  color: red;
+  padding: 10px 0;
+  margin: 0;
+  font-size: 1.25rem;
+  min-height: 23.5px;
+}

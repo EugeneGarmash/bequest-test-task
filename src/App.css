@@ -12,6 +12,8 @@
 .App {
   background-color: #282c34;
   min-height: 100vh;
+  min-width: 1000px;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
