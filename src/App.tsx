@@ -1,15 +1,17 @@
-import Header from './Header';
-import AddressManager from './AddressManager/AddressManager';
+import Header from './components/Header';
+import AddressManager from './components/AddressManager/AddressManager';
 import { QueryClient, DefaultOptions, QueryClientProvider } from 'react-query';
-import AddressBook from './AddressBook/AddressBook';
+import AddressBook from './components/AddressBook/AddressBook';
 import './App.css';
+import { AddressBookContextProvider } from './context/useAddressesContext';
 
 /*
-  @todo font - copy & paste
-  @todo context - addressBook
-  @todo api - postcode
-  @todo menu:hover - bold
-  @todo move api types
+  @todo font - copy & paste & menu:hover - bold
+
+  move (api types)
+  test everything one more time
+  tests
+  deploy
 */
 
 const RQ_CONFIG = {
@@ -37,13 +39,13 @@ const App = () => {
   
   return (
     <QueryClientProvider client={client}>
-      <div className="App">
-        <Header />
-
+      <AddressBookContextProvider>
+        <div className="App">
+          <Header />
           <AddressManager />
           <AddressBook />
-
-      </div>
+        </div>
+      </AddressBookContextProvider>
     </QueryClientProvider>
 
   )

@@ -1,7 +1,15 @@
+import axios from 'axios';
 import {
   useQuery,
 } from 'react-query';
-import postcodeInstance from '../services/getAddressAPI';
+
+const config = {
+  baseURL: 'https://api.getAddress.io/',
+};
+
+const postcodeInstance = axios.create(config);
+
+export default postcodeInstance;
 
 export type PostcodeResourse = {
   "latitude": number,

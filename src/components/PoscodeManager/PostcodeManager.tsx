@@ -2,9 +2,11 @@ import { useRef, useState } from 'react';
 import Select from 'react-select';
 import { CustomDropdownIndicator } from './components';
 import Button from '../Button/Button';
-import { PostcodeResourse, usePostcodeSearch } from '../query/poscode';
+import { PostcodeResourse, usePostcodeSearch } from '../../query/poscode';
 import styles from './PostcodeManager.module.scss';
 import { customStyles } from './styles';
+import ErrorText from '../ErrorText/ErrorText';
+import { useAddressesContext } from '../../context/useAddressesContext';
 
 type Option = { value: string; label: string};
 
@@ -14,6 +16,8 @@ const PostcodeManager = () => {
   const [ options, setOptions ] = useState<Option[]>([]); 
   const [ error, setError ] = useState('');
   const selectRef = useRef<any>();
+
+  const { setAddresses } = useAddressesContext();
 
   const handleInputValue = (value: string, action: any) => {
     if (action.action === "input-change") {
@@ -30,14 +34,19 @@ const PostcodeManager = () => {
     {
       enabled: false,
       onError: (error: any) => {
+        console.log('🚀 ~ file: PostcodeManager.tsx ~ line 34 ~ PostcodeManager ~ error', error);
         selectRef.current.blur();
-        setError(error.message);
+        setError(error.response?.data?.Message || error.message);
       },
       onSuccess: (data: PostcodeResourse) => {
-        setOptions(data?.addresses?.map((address: any) => ({
-          value: address.name,
-          label: address.name
-        })));
+        setInputValue('');
+        setOptions(data?.addresses?.map((a: any) => {
+          const address = a.replaceAll(', ,', '');
+          return ({
+            value: address,
+            label: address
+          })
+        }));
       }
     });
 
@@ -72,7 +81,18 @@ const PostcodeManager = () => {
         }}
       >Search postcode</Button>
     </div>
-    <p className={styles.PostcodeManager__errorText}>{error}</p>
+    <ErrorText error={error}/>
+
+    <div className={styles.PostcodeManager__buttonContainer}>
+      <Button
+        disabled={!selectValue?.label}
+        fullHeight
+        onClick={() => setAddresses(selectValue?.label as string)}
+      >
+        Save to Addressbook
+      </Button>
+    </div>
+
   </div>
 }
 

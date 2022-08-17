@@ -1,0 +1,22 @@
+.ManualAddressManager__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.ManualAddressManager__textInput {
+  font-size: 1.125rem;
+  height: 42px;
+  width: 400px;
+  border-radius: 21px;
+  outline: none;
+  box-shadow: none;
+  border: 1px solid rgb(204, 204, 204);
+  padding: 0 20px 0px;
+}
+
+.ManualAddressManager__buttonContainer {
+  align-self: center;
+  height: 42px;
+  margin-bottom: 15px;
+}
+

@@ -1,8 +1,6 @@
 .Header {
   --font-family-sans-serif: "HCo Gotham SSm", sans-serif;
   font-family: "HCo Gotham SSm",sans-serif;
-
-  // width: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -42,8 +40,12 @@
   display: flex;
 }
 
-.Header__navigation_item {
+.Header__navigation_item > a {
   margin-right: 20px;
+
+  &:hover {
+    font-weight: 500;
+  }
 }
 
 .Header__navigationLink {

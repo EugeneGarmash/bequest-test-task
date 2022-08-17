@@ -1,7 +1,7 @@
 import styles from './Header.module.scss';
 import Container from '../Container/Container';
-import Button from '../Button/Button';
 import BurgerButton from './BurderButton';
+import Button from '../Button/Button';
 
 const links = [
   {
