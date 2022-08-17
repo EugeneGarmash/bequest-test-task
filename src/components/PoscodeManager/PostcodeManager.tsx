@@ -13,7 +13,6 @@ type Option = { value: string; label: string};
 const PostcodeManager = () => {
   const [ inputValue, setInputValue ] = useState('');
   const [ selectValue, setSelectValue ] = useState<Option | null>(null);
-  console.log('🚀 ~ file: PostcodeManager.tsx ~ line 16 ~ PostcodeManager ~ selectValue', selectValue);
   const [ options, setOptions ] = useState<Option[]>([]); 
   const [ error, setError ] = useState('');
   const selectRef = useRef<any>();
@@ -35,7 +34,6 @@ const PostcodeManager = () => {
     {
       enabled: false,
       onError: (error: any) => {
-        console.log('🚀 ~ file: PostcodeManager.tsx ~ line 34 ~ PostcodeManager ~ error', error);
         selectRef.current.blur();
         setError(error.response?.data?.Message || error.message);
       },
@@ -88,7 +86,7 @@ const PostcodeManager = () => {
 
     <div className={styles.PostcodeManager__buttonContainer}>
       <Button
-        disabled={!selectValue?.label || !inputValue}
+        disabled={!selectValue?.label}
         fullHeight
         onClick={() => {
           setAddresses(selectValue?.label as string)

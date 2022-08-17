@@ -12,12 +12,14 @@ type Inputs = {
 
 
 const ManualAddressManager = () => {
-  const { setAddresses } = useAddressesContext();
-  const { register, watch, handleSubmit, formState: { errors } } = useForm<Inputs>({
+  const { addresses, setAddresses } = useAddressesContext();
+  const { register, watch, getValues, handleSubmit, formState: { errors } } = useForm<Inputs>({
     shouldFocusError: true,
   });
-  const buttonIsEnabled = watch("country")?.trim() && watch("town")?.trim() && watch("postcode")?.trim();
-  const onSubmit: SubmitHandler<Inputs> = data => setAddresses(Object.values(data).reduce((curr, acc) => acc + ', ' + curr));
+  const values = getValues();
+  const allFieldsAreFilled = watch("postcode")?.trim() && watch("town")?.trim() && watch("country")?.trim() ;
+  const addressHasBeenSaved = !!Object.values(values).length && addresses.includes(Object.values(values).reduce((curr, acc) => acc + ', ' + curr) );
+  const onSubmit: SubmitHandler<Inputs> = data => setAddresses(Object.values(data)?.reduce((curr, acc) => acc + ', ' + curr));
 
   return (
     <form className={styles.ManualAddressManager__form} onSubmit={handleSubmit(onSubmit)}>
@@ -30,7 +32,7 @@ const ManualAddressManager = () => {
       <ErrorText error={errors.postcode ? "This field is required" : '' }/>
       
       <div className={styles.ManualAddressManager__buttonContainer}>
-        <Button disabled={!buttonIsEnabled} fullHeight onClick={handleSubmit(onSubmit)}>Save to Addressbook</Button>
+        <Button disabled={!allFieldsAreFilled || addressHasBeenSaved} fullHeight onClick={handleSubmit(onSubmit)}>Save to Addressbook</Button>
       </div>
     </form>
   )
