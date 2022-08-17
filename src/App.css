@@ -1,3 +1,13 @@
+html,
+:root {
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+a,
+button {
+  font-family: "Trebuchet MS", sans-serif;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

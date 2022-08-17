@@ -13,6 +13,7 @@ type Option = { value: string; label: string};
 const PostcodeManager = () => {
   const [ inputValue, setInputValue ] = useState('');
   const [ selectValue, setSelectValue ] = useState<Option | null>(null);
+  console.log('🚀 ~ file: PostcodeManager.tsx ~ line 16 ~ PostcodeManager ~ selectValue', selectValue);
   const [ options, setOptions ] = useState<Option[]>([]); 
   const [ error, setError ] = useState('');
   const selectRef = useRef<any>();
@@ -53,6 +54,7 @@ const PostcodeManager = () => {
  return <div className={styles.PostcodeManager}>
     <div className={styles.PostcodeManager__selectContainer}>
       <Select
+        isClearable={true}
         className={styles.PostcodeManager__select}
         placeholder={"Enter your postcode"}
         styles={customStyles}
@@ -75,6 +77,7 @@ const PostcodeManager = () => {
       />
       <Button
         fullHeight
+        disabled={!!selectValue?.label || !inputValue}
         onClick={() => {
           selectRef.current.focus();
           refetch();
@@ -85,9 +88,12 @@ const PostcodeManager = () => {
 
     <div className={styles.PostcodeManager__buttonContainer}>
       <Button
-        disabled={!selectValue?.label}
+        disabled={!selectValue?.label || !inputValue}
         fullHeight
-        onClick={() => setAddresses(selectValue?.label as string)}
+        onClick={() => {
+          setAddresses(selectValue?.label as string)
+          setSelectValue(null)
+        }}
       >
         Save to Addressbook
       </Button>

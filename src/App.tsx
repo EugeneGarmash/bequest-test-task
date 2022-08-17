@@ -5,15 +5,6 @@ import AddressBook from './components/AddressBook/AddressBook';
 import './App.css';
 import { AddressBookContextProvider } from './context/useAddressesContext';
 
-/*
-  @todo font - copy & paste & menu:hover - bold
-
-  move (api types)
-  test everything one more time
-  tests
-  deploy
-*/
-
 const RQ_CONFIG = {
   queries: {
     suspense: false,
