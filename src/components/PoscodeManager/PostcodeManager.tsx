@@ -17,7 +17,7 @@ const PostcodeManager = () => {
   const [ error, setError ] = useState('');
   const selectRef = useRef<any>();
 
-  const { setAddresses } = useAddressesContext();
+  const { addresses, setAddresses } = useAddressesContext();
 
   const handleInputValue = (value: string, action: any) => {
     if (action.action === "input-change") {
@@ -86,7 +86,7 @@ const PostcodeManager = () => {
 
     <div className={styles.PostcodeManager__buttonContainer}>
       <Button
-        disabled={!selectValue?.label}
+        disabled={!selectValue?.label || addresses.includes(selectValue?.label)}
         fullHeight
         onClick={() => {
           setAddresses(selectValue?.label as string)
